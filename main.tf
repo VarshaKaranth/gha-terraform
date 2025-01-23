@@ -8,15 +8,54 @@ resource "aws_iam_role" "github_actions_role" {
   name = "github_actions_role"
   assume_role_policy = <<EOF
 {
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Principal": {
-      "Service": "ec2.amazonaws.com"
-    },
-    "Action": "sts:AssumeRole"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:DeleteBucket",
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "s3:PutBucketPolicy",
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::gha-terraform",
+                "arn:aws:s3:::gha-terraform/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:AttachRolePolicy",
+                "iam:DetachRolePolicy",
+                "iam:PutRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:GetRole",
+                "iam:ListRolePolicies",
+                "iam:ListAttachedRolePolicies",
+                "iam:PassRole"
+            ],
+            "Resource": "arn:aws:iam::account-id:role/github_actions_role"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreatePolicy",
+                "iam:DeletePolicy",
+                "iam:GetPolicy",
+                "iam:ListPolicies",
+                "iam:AttachUserPolicy",
+                "iam:DetachUserPolicy"
+            ],
+            "Resource": "*"
+        }
+    ]
 }
 EOF  
 }
