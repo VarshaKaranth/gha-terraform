@@ -1,0 +1,24 @@
+{
+    "name": "gha-terraform",
+    "version": "1.0.0",
+    "description": "GitHub Actions for Terraform",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "terraform",
+        "github",
+        "actions"
+    ],
+    "author": "HashiCorp",
+    "license": "MPL-2.0",
+    "dependencies": {
+        "@actions/core": "^1.2.6",
+        "@actions/exec": "^1.0.0",
+        "@actions/io": "^1.0.0",
+        "@actions/tool-cache": "^1.0.0",
+        "fs-extra": "^9.0.1",
+        "path": "^0.12.7"
+    }
+}
