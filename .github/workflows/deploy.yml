@@ -39,5 +39,17 @@ jobs:
                 aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                 aws-region: us-west-2
 
-            - name: Deploy to S3
-              run: aws s3 sync ./ s3://gha-terraform --delete
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v1
+
+            - name: Terraform Validate
+              run: terraform validate
+
+            - name: Terraform Init
+              run: terraform init
+
+            - name: Terraform Plan
+              run: terraform plan
+              
+            - name: Terraform Apply
+              run: terraform apply -auto-approve
