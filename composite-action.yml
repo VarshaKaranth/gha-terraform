@@ -1,0 +1,12 @@
+name: Composite Action
+description: 'A composite action that runs a sequence of other actions'
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Run custom action
+      uses: ./
+      with:
+        exampleInput: 'Hello, World!'
