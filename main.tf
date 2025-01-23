@@ -20,7 +20,8 @@ resource "aws_iam_role" "github_actions_role" {
                 "s3:PutBucketPolicy",
                 "s3:PutObject",
                 "s3:GetObject",
-                "s3:DeleteObject"
+                "s3:DeleteObject",
+                "s3:ListObjectsV2"
             ],
             "Resource": [
                 "arn:aws:s3:::gha-terraform",
@@ -41,7 +42,7 @@ resource "aws_iam_role" "github_actions_role" {
                 "iam:ListAttachedRolePolicies",
                 "iam:PassRole"
             ],
-            "Resource": "arn:aws:iam::account-id:role/github_actions_role"
+            "Resource": "arn:aws:iam::202533515928:role/GitLabRole"
         },
         {
             "Effect": "Allow",
