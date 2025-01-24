@@ -1,0 +1,16 @@
+name: 'My Custom Action'
+description: 'An example custom action'
+
+inputs:
+  example-input:
+    description: 'An example input'
+    required: true
+    default: 'default-value'
+
+outputs:
+  example-output:
+    description: 'An example output'
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
