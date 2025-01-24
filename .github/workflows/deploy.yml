@@ -10,15 +10,18 @@ jobs:
     build:
         runs-on: ubuntu-latest
         outputs:
-            example-output: ${{ steps.set-output-step.outputs.example }}
+            greeting: ${{ steps.set-greeting.outputs.greeting }}
 
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
 
-            - name: Set Output
-              id: set-output-step
-              run: echo "::set-output name=example::Hello from build"
+            - name: Generate greeting message
+              id: set-greeting
+              run: |
+                  Greeting="Hello, GitHub Actions!"
+                  echo "Generated greeting: $Greeting"
+                  echo "::set-output name=greeting::$Greeting"
 
             - name: Setup Node.js
               uses: actions/setup-node@v3
@@ -38,8 +41,9 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v3
 
-            - name: Use output from build
-              run: echo "The output from build is ${{ needs.build.outputs.example-output }}"
+            - name: Use generated greeting
+              run: |
+                  echo "The greeting message is: ${{ needs.build.outputs.greeting }}"
             
             - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@v1
