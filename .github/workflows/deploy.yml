@@ -9,10 +9,19 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        outputs:
+            example-output: ${{ steps.set-output-step.outputs.example }}
 
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
+
+            - name: Use output from build
+              run: echo "The output from build is ${{ needs.build.outputs.example-output }}"
+
+            - name: Set Output
+              id: set-output-step
+              run: echo "::set-output name=example::Hello from build"
 
             - name: Setup Node.js
               uses: actions/setup-node@v3
@@ -47,9 +56,3 @@ jobs:
 
             - name: Terraform Plan
               run: terraform plan
-              
-            - name: Terraform Apply
-              run: terraform apply -auto-approve
-
-            - name: Terraform Destroy
-              run: terraform destroy -auto-approve
