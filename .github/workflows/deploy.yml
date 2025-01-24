@@ -16,9 +16,6 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v3
 
-            - name: Use output from build
-              run: echo "The output from build is ${{ needs.build.outputs.example-output }}"
-
             - name: Set Output
               id: set-output-step
               run: echo "::set-output name=example::Hello from build"
@@ -40,6 +37,9 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v3
+
+            - name: Use output from build
+              run: echo "The output from build is ${{ needs.build.outputs.example-output }}"
             
             - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@v1
